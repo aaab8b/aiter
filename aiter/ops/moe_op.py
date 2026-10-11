@@ -2,6 +2,7 @@
 # Copyright (C) 2024-2026, Advanced Micro Devices, Inc. All rights reserved.
 
 import functools
+import os
 
 import torch
 from torch import Tensor
@@ -684,7 +685,12 @@ def fmoe_q256_producer(
     gate_scale: Tensor,
     down_scale: Tensor,
     topk: int,
+    job_map: Tensor | None = None,
 ) -> None: ...
+
+
+# Explicit process-level opt-in for fused_moe callers; read once outside graphs.
+_Q256_WEIGHTED_SCHEDULE = os.environ.get("AITER_Q256_WEIGHTED_SCHEDULE", "0") == "1"
 
 
 def fmoe_q256(
@@ -702,10 +708,26 @@ def fmoe_q256(
     gate_scale: Tensor,
     down_scale: Tensor,
     topk: int,
+    *,
+    weighted_schedule: bool = _Q256_WEIGHTED_SCHEDULE,
 ) -> None:
     """Run the universal assembly producer and its supplied FP32 reducer."""
     from aiter.ops.triton._triton_kernels.moe.reduce import _reduce_q256_routes
 
+    tokens, model = out.shape
+    weighted = weighted_schedule and (
+        tokens,
+        model,
+        topk,
+        gate.shape[0],
+        partials.ndim,
+    ) == (8192, 8192, 11, 513, 3)
+    job_map = None
+    if weighted:
+        from aiter.ops.triton._triton_kernels.moe.q256_schedule import make_job_map
+
+        job_map = torch.empty(1024, dtype=torch.int32, device=out.device)
+        make_job_map[(8,)](sorted_ids, sorted_experts, counts, job_map, STYLE=0)
     fmoe_q256_producer(
         out,
         partials,
@@ -721,6 +743,7 @@ def fmoe_q256(
         gate_scale,
         down_scale,
         topk,
+        job_map,
     )
     tokens, model = out.shape
     if partials.ndim == 3:
