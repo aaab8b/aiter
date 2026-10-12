@@ -1,0 +1,4351 @@
+{
+  "timing": {
+    "seed": 1234,
+    "shape": {
+      "tokens": 8192,
+      "model_dim": 8192,
+      "inter_dim": 256,
+      "experts": 513,
+      "topk": 11
+    },
+    "runtime": {
+      "torch": "2.13.0+git733fca1",
+      "hip": "7.2.53211",
+      "aiter_source": "/usr/local/lib/python3.12/dist-packages/aiter/__init__.py",
+      "gfx": "gfx950"
+    },
+    "input_kind": "real token/slot routing and weights; synthetic activations and expert weights",
+    "synthetic_tensors_sha256": {
+      "x": "9d41801613abc026f0142487f60922b5f2399cc430fbcf4da11bc5df10222f4a",
+      "w1": "a5f7f9a36cae0dde82c408137ab32aa61ba4db7027811d037a9ba5aa28e9250d",
+      "w2": "ae6eca1f17a30a74ad9c00e0c9e7c2e65afaaf49afc37f392995c020ced1adf2"
+    },
+    "configs": {
+      "q256": {
+        "path": "/results/q256-dedicated.csv",
+        "sha256": "05ce12eda55a4e5f87400b40964643254510a6941c952549c3482f2b076cc35c"
+      },
+      "flydsl": {
+        "path": "/results/flydsl-dedicated.csv",
+        "sha256": "ce8b1a5c8295491b868d18ae9473278fcb8e8eab4d7915bce038429026bd1a98"
+      }
+    },
+    "cases": [
+      {
+        "name": "routing/rank0/layer-call029.pt",
+        "metadata": {
+          "rank": 0,
+          "call_index": 29,
+          "pid": 943,
+          "labels": [
+            {
+              "type": "RoutedExperts",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.29.mlp.experts"
+            }
+          ],
+          "tokens": 8192,
+          "model_dim": 8192,
+          "inter_dim": 256,
+          "experts": 513,
+          "topk": 11,
+          "block_m": 256,
+          "input_dtype": "torch.bfloat16",
+          "input_shape": [
+            8192,
+            8192
+          ],
+          "input_stride": [
+            8192,
+            1
+          ],
+          "routes_dtype": "torch.int32",
+          "weights_dtype": "torch.float32",
+          "sorted_capacity": 221440,
+          "valid_sorted_rows": 160512,
+          "producer": "{'kernelName': 'fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate', 'activation': <ActivationType.Silu: 0>, 'quant_type': <QuantType.per_1x32: 3>, 'xbf16': False, 'flat': 0}",
+          "routes_sha256": "164c890956f36b26f185efc2030651c3ba09a16dd2429ee1695fcfdd55438fed",
+          "weights_sha256": "039d33754fa147033af6e3eb76dcd0ed7f84d1870076e29d439d91d3f471faba"
+        },
+        "routing_sha256": "164c890956f36b26f185efc2030651c3ba09a16dd2429ee1695fcfdd55438fed",
+        "routing_weights_sha256": "039d33754fa147033af6e3eb76dcd0ed7f84d1870076e29d439d91d3f471faba",
+        "timings": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1176.9634628295898,
+                1175.6222915649414,
+                1208.6795043945312,
+                1174.963493347168,
+                1176.0390853881836,
+                1176.7194747924805,
+                1175.5714797973633,
+                1177.063102722168,
+                1177.0655059814453,
+                1175.2114868164062,
+                1175.998306274414,
+                1176.465072631836,
+                1174.1050338745117,
+                1177.183494567871,
+                1176.0519409179688
+              ],
+              "median_us": 1176.0519409179688,
+              "wall_samples_us": [
+                1177.3884668946266,
+                1176.0100908577442,
+                1209.2467118054628,
+                1175.3772012889385,
+                1176.4930840581656,
+                1177.1100759506226,
+                1175.9807914495468,
+                1177.556961774826,
+                1177.7134705334902,
+                1175.664896145463,
+                1176.4720920473337,
+                1176.866590976715,
+                1174.6654100716114,
+                1177.552379667759,
+                1176.4541734009981
+              ],
+              "wall_median_us": 1176.4930840581656,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1259.2066192626953,
+                1259.7385787963867,
+                1260.0318145751953,
+                1260.3374481201172,
+                1259.6574020385742,
+                1259.1962432861328,
+                1260.2886199951172,
+                1261.1086654663086,
+                1261.2374114990234,
+                1260.1774215698242,
+                1260.2010345458984,
+                1260.7990646362305,
+                1261.8322372436523,
+                1261.3834381103516,
+                1260.8610534667969
+              ],
+              "median_us": 1260.2886199951172,
+              "wall_samples_us": [
+                1259.6313934773207,
+                1260.1524963974953,
+                1260.4330852627754,
+                1260.7963755726814,
+                1260.0599974393845,
+                1259.7200740128756,
+                1260.69157384336,
+                1261.5601532161236,
+                1261.7892492562532,
+                1260.7254832983017,
+                1260.6040854007006,
+                1261.2419668585062,
+                1262.209853157401,
+                1261.7635540664196,
+                1261.266665533185
+              ],
+              "wall_median_us": 1260.7254832983017,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              6.531347212998403,
+              6.677281195263064,
+              4.075477268641577,
+              6.773896538604842,
+              6.63817927914895,
+              6.549953506723636,
+              6.722042780810171,
+              6.664418780523078,
+              6.673755848832375,
+              6.74237875549099,
+              6.681690140162917,
+              6.688931993198046,
+              6.952366628449121,
+              6.675206047466296,
+              6.7262853678953345
+            ],
+            "q256_latency_reduction_percent": 6.677281195263064,
+            "q256_wall_latency_reduction_samples_percent": [
+              6.5291264578326675,
+              6.677160564320277,
+              4.061014746105402,
+              6.775017436494743,
+              6.6319789177529955,
+              6.557805957564557,
+              6.719389908791315,
+              6.658675072064246,
+              6.663218819808501,
+              6.746955485527568,
+              6.673942622248787,
+              6.68986428448403,
+              6.935807295973679,
+              6.674085182383368,
+              6.724390206279926
+            ],
+            "q256_wall_latency_reduction_percent": 6.674085182383368,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1172.520980834961,
+                1168.320541381836,
+                1168.5833740234375,
+                1169.178123474121,
+                1166.0541915893555,
+                1168.5797500610352,
+                1169.7677612304688,
+                1170.3153610229492,
+                1168.2649612426758,
+                1170.5209732055664,
+                1169.5177841186523,
+                1169.0001678466797,
+                1169.3817520141602,
+                1170.985336303711,
+                1169.8925399780273
+              ],
+              "median_us": 1169.3817520141602,
+              "wall_samples_us": [
+                1172.7876402437687,
+                1168.5755755752325,
+                1168.837295845151,
+                1169.3942826241255,
+                1166.2308312952518,
+                1168.8629910349846,
+                1169.9859611690044,
+                1170.4828683286905,
+                1168.4555001556873,
+                1170.701663941145,
+                1169.7084829211235,
+                1169.1831890493631,
+                1170.1231636106968,
+                1171.2375469505787,
+                1170.0699757784605
+              ],
+              "wall_median_us": 1169.7084829211235,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1260.6453704833984,
+                1261.5021896362305,
+                1261.0137939453125,
+                1261.9678115844727,
+                1261.5605926513672,
+                1260.9817504882812,
+                1260.785026550293,
+                1261.664161682129,
+                1261.1017608642578,
+                1261.2197494506836,
+                1261.7781829833984,
+                1262.010154724121,
+                1261.4213562011719,
+                1261.8105697631836,
+                1261.914176940918
+              ],
+              "median_us": 1261.5021896362305,
+              "wall_samples_us": [
+                1260.8658708631992,
+                1261.8364486843348,
+                1261.2704560160637,
+                1262.2029520571232,
+                1261.7363687604666,
+                1261.2376548349857,
+                1261.0030733048916,
+                1261.8447560817003,
+                1261.3504752516747,
+                1261.4155746996403,
+                1261.9589548557997,
+                1262.2022535651922,
+                1261.6590596735477,
+                1262.0744574815035,
+                1262.1532566845417
+              ],
+              "wall_median_us": 1261.7363687604666,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              6.990418694406178,
+              7.3865625458220245,
+              7.32985002746794,
+              7.352777722107572,
+              7.5704965435936815,
+              7.327782530672304,
+              7.219094722980795,
+              7.24034203661518,
+              7.3615629208192646,
+              7.191353948003151,
+              7.311934863749343,
+              7.369987200917068,
+              7.296499598214604,
+              7.198008610477777,
+              7.292226257887506
+            ],
+            "q256_latency_reduction_percent": 7.311934863749343,
+            "q256_wall_latency_reduction_samples_percent": [
+              6.985535309884425,
+              7.390884389679942,
+              7.328575701588899,
+              7.352911770784504,
+              7.56937343092041,
+              7.324128283506331,
+              7.217834283095405,
+              7.2403429433512985,
+              7.364723518057278,
+              7.19143734848014,
+              7.310100822194915,
+              7.369584728048871,
+              7.25520063134455,
+              7.1974288040177745,
+              7.295728978901346
+            ],
+            "q256_wall_latency_reduction_percent": 7.310100822194915,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "profiles": {
+          "q256": {
+            "selected": "q256",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.435999999999808,
+                "mean_us": 4.358999999999952
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 18.07600000000025,
+                "mean_us": 4.519000000000062
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.556999999999789,
+                "mean_us": 3.8892499999999472
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 177.838000000001,
+                "mean_us": 44.45950000000025
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 125.1169999999994,
+                "mean_us": 31.27924999999985
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 147.95699999999965,
+                "mean_us": 36.98924999999991
+              },
+              {
+                "name": "make_job_map.kd",
+                "count": 4,
+                "sum_us": 18.875999999999067,
+                "mean_us": 4.718999999999767
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route_weighted.kd",
+                "count": 4,
+                "sum_us": 3157.024999999999,
+                "mean_us": 789.2562499999998
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1057.0849999999994,
+                "mean_us": 264.27124999999984
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "unweighted": {
+            "selected": "unweighted",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 16.5559999999993,
+                "mean_us": 4.138999999999825
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 16.835999999999558,
+                "mean_us": 4.2089999999998895
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.51600000000002,
+                "mean_us": 3.879000000000005
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 180.11800000000005,
+                "mean_us": 45.02950000000001
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 119.27700000000021,
+                "mean_us": 29.819250000000054
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 153.03699999999935,
+                "mean_us": 38.25924999999984
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route.kd",
+                "count": 4,
+                "sum_us": 3513.4289999999996,
+                "mean_us": 878.3572499999999
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1052.525000000001,
+                "mean_us": 263.13125000000025
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "flydsl": {
+            "selected": "flydsl",
+            "kernels": [
+              {
+                "name": "clear_workspace_kernel_0.kd",
+                "count": 4,
+                "sum_us": 17.675999999999874,
+                "mean_us": 4.4189999999999685
+              },
+              {
+                "name": "p0_scatter_kernel_1.kd",
+                "count": 4,
+                "sum_us": 16.1569999999995,
+                "mean_us": 4.039249999999875
+              },
+              {
+                "name": "p1_count_kernel_2.kd",
+                "count": 4,
+                "sum_us": 15.51599999999928,
+                "mean_us": 3.87899999999982
+              },
+              {
+                "name": "p23_kernel_3.kd",
+                "count": 4,
+                "sum_us": 78.67699999999905,
+                "mean_us": 19.669249999999764
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 120.07700000000023,
+                "mean_us": 30.019250000000056
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 123.55699999999916,
+                "mean_us": 30.88924999999979
+              },
+              {
+                "name": "mfma_moe1_silu_mul_afp4_wfp4_fp4_t64x128x256_pm1_fp4q_sort_async_xcd4_v2out_v33.kd",
+                "count": 4,
+                "sum_us": 1496.2900000000004,
+                "mean_us": 374.0725000000001
+              },
+              {
+                "name": "gemm2_a4w4_port_hmax8192_imax256_bm64_reduce_tk11_bhoist_apf_spart4x2_bf16lds_kst_v2_biasabi7_routeguard.kd",
+                "count": 4,
+                "sum_us": 1976.734,
+                "mean_us": 494.1835
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024.kd",
+                "count": 4,
+                "sum_us": 1344.8080000000007,
+                "mean_us": 336.20200000000017
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          }
+        },
+        "cross_provider": {
+          "exact_equal": true,
+          "nrms": 0.0,
+          "max_abs": 0.0
+        },
+        "weighted_unweighted_exact_equal": true,
+        "reference": {
+          "q256": {
+            "nrms": 0.00261318264529109,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          },
+          "flydsl": {
+            "nrms": 0.00261318264529109,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          }
+        },
+        "weighted_vs_unweighted": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1175.6518173217773,
+                1174.9270629882812,
+                1177.7006912231445,
+                1175.9114456176758,
+                1176.9446563720703,
+                1177.1142578125,
+                1178.1111145019531,
+                1175.2618408203125,
+                1177.7715301513672,
+                1176.2518310546875,
+                1176.5934753417969,
+                1175.8462524414062,
+                1175.1862335205078,
+                1178.486671447754,
+                1176.2814712524414
+              ],
+              "median_us": 1176.2814712524414,
+              "wall_samples_us": [
+                1176.0637070983648,
+                1175.2671003341675,
+                1178.0847515910864,
+                1176.2710846960545,
+                1177.3844808340073,
+                1177.5443702936172,
+                1178.5436421632767,
+                1175.6343021988869,
+                1178.1397555023432,
+                1176.6271851956844,
+                1176.9625823944807,
+                1176.2118712067604,
+                1175.6032053381205,
+                1178.8510531187057,
+                1176.6356974840164
+              ],
+              "wall_median_us": 1176.6356974840164,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1230.3995895385742,
+                1229.6783447265625,
+                1230.3675842285156,
+                1229.6259307861328,
+                1230.2391815185547,
+                1230.1975631713867,
+                1230.127182006836,
+                1229.2759323120117,
+                1228.4955596923828,
+                1230.4067611694336,
+                1229.4275283813477,
+                1227.743911743164,
+                1230.240364074707,
+                1228.4079360961914,
+                1229.058723449707
+              ],
+              "median_us": 1229.6783447265625,
+              "wall_samples_us": [
+                1230.7954020798206,
+                1230.0680112093687,
+                1230.7599931955338,
+                1230.0004065036774,
+                1230.6516896933317,
+                1230.6226044893265,
+                1230.5338121950626,
+                1229.6389229595661,
+                1228.8500368595123,
+                1230.7985965162516,
+                1229.825234040618,
+                1228.1948421150446,
+                1230.6369189172983,
+                1228.7788279354572,
+                1229.4029165059328
+              ],
+              "wall_median_us": 1230.0680112093687,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              4.449592854409879,
+              4.452488081381642,
+              4.280581972451356,
+              4.368359825830602,
+              4.3320458287387575,
+              4.315022801869373,
+              4.228511349535706,
+              4.393976166938368,
+              4.128955057331831,
+              4.4013843083302655,
+              4.297451604090205,
+              4.227075272405379,
+              4.47507106431244,
+              4.06389955498695,
+              4.2941196535452
+            ],
+            "q256_latency_reduction_percent": 4.315022801869373,
+            "q256_wall_latency_reduction_samples_percent": [
+              4.446855658460308,
+              4.455112268249501,
+              4.279895503239576,
+              4.368236101673376,
+              4.32837408873978,
+              4.313120367046662,
+              4.225009464717134,
+              4.391908856520075,
+              4.126645224080062,
+              4.401322155704282,
+              4.2983872978810025,
+              4.232469403532551,
+              4.471969980194967,
+              4.063202724662667,
+              4.292101337443163
+            ],
+            "q256_wall_latency_reduction_percent": 4.313120367046662,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1189.8379135131836,
+                1185.3975296020508,
+                1183.444709777832,
+                1184.7943115234375,
+                1184.9346923828125,
+                1184.1159439086914,
+                1186.180305480957,
+                1182.9066848754883,
+                1185.1315307617188,
+                1183.6491394042969,
+                1184.2635345458984,
+                1188.2379150390625,
+                1185.9886932373047,
+                1186.9659042358398,
+                1184.9091339111328
+              ],
+              "median_us": 1184.9346923828125,
+              "wall_samples_us": [
+                1190.0107841938734,
+                1185.5657398700714,
+                1183.6217809468508,
+                1184.95705537498,
+                1185.1177643984556,
+                1184.4123899936676,
+                1186.3546445965767,
+                1183.109488338232,
+                1185.3021662682295,
+                1183.8287860155106,
+                1184.4225693494081,
+                1188.4209234267473,
+                1186.1466523259878,
+                1187.1486343443394,
+                1185.0722692906857
+              ],
+              "wall_median_us": 1185.1177643984556,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1234.1455459594727,
+                1229.9863052368164,
+                1229.643898010254,
+                1229.7511291503906,
+                1229.4203186035156,
+                1229.2167282104492,
+                1230.7630920410156,
+                1229.5215225219727,
+                1229.4503021240234,
+                1229.4971466064453,
+                1228.905906677246,
+                1228.812255859375,
+                1229.207534790039,
+                1228.8051223754883,
+                1228.9811325073242
+              ],
+              "median_us": 1229.4503021240234,
+              "wall_samples_us": [
+                1234.3864422291517,
+                1230.2052229642868,
+                1229.863716289401,
+                1229.9242243170738,
+                1229.6149227768183,
+                1229.3840292841196,
+                1230.9441063553095,
+                1229.6916265040636,
+                1229.6151276677847,
+                1229.660427197814,
+                1229.1289307177067,
+                1229.005716741085,
+                1229.3584179133177,
+                1228.9716210216284,
+                1229.178411886096
+              ],
+              "wall_median_us": 1229.6151276677847,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              3.590146445153889,
+              3.625144072330195,
+              3.757119301545676,
+              3.6557655090760397,
+              3.6184228898407857,
+              3.6690669160854674,
+              3.622369475357395,
+              3.7912990372766187,
+              3.6047631438000116,
+              3.7290047665986257,
+              3.6326924534078517,
+              3.3019153761561943,
+              3.5159922413033846,
+              3.4048700951674213,
+              3.5860598206481216
+            ],
+            "q256_latency_reduction_percent": 3.622369475357395,
+            "q256_wall_latency_reduction_samples_percent": [
+              3.5949566940431783,
+              3.6286208399158526,
+              3.7599235370619732,
+              3.6560926318092695,
+              3.618788090004266,
+              3.658062754942356,
+              3.62237907704496,
+              3.788115423560431,
+              3.6038074355512975,
+              3.7271786721433258,
+              3.6372393693632956,
+              3.3022460971097125,
+              3.5149851302662762,
+              3.4030880747695456,
+              3.588262059348429
+            ],
+            "q256_wall_latency_reduction_percent": 3.62237907704496,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "elapsed_seconds": 18.879124072380364
+      },
+      {
+        "name": "routing/rank0/layer-call046.pt",
+        "metadata": {
+          "rank": 0,
+          "call_index": 46,
+          "pid": 943,
+          "labels": [
+            {
+              "type": "RoutedExperts",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.46.mlp.experts"
+            }
+          ],
+          "tokens": 8192,
+          "model_dim": 8192,
+          "inter_dim": 256,
+          "experts": 513,
+          "topk": 11,
+          "block_m": 256,
+          "input_dtype": "torch.bfloat16",
+          "input_shape": [
+            8192,
+            8192
+          ],
+          "input_stride": [
+            8192,
+            1
+          ],
+          "routes_dtype": "torch.int32",
+          "weights_dtype": "torch.float32",
+          "sorted_capacity": 221440,
+          "valid_sorted_rows": 182272,
+          "producer": "{'kernelName': 'fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate', 'activation': <ActivationType.Silu: 0>, 'quant_type': <QuantType.per_1x32: 3>, 'xbf16': False, 'flat': 0}",
+          "routes_sha256": "f366ba414761632da0e929a242a771b032dae3f73ac1885f449fa8cd8cb4e512",
+          "weights_sha256": "8ea62e5d921a4309278a948ba63e7aa72f3c668d2e0cbabded6415a5793b34fa"
+        },
+        "routing_sha256": "f366ba414761632da0e929a242a771b032dae3f73ac1885f449fa8cd8cb4e512",
+        "routing_weights_sha256": "8ea62e5d921a4309278a948ba63e7aa72f3c668d2e0cbabded6415a5793b34fa",
+        "timings": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1301.16455078125,
+                1303.6229705810547,
+                1302.2937774658203,
+                1301.5557098388672,
+                1303.9250183105469,
+                1303.5137939453125,
+                1300.7801818847656,
+                1301.7633819580078,
+                1300.7069396972656,
+                1301.4141845703125,
+                1305.0414276123047,
+                1303.1173706054688,
+                1301.0497283935547,
+                1301.2753295898438,
+                1302.6589965820312
+              ],
+              "median_us": 1301.7633819580078,
+              "wall_samples_us": [
+                1301.5435822308064,
+                1304.0051516145468,
+                1302.7414679527283,
+                1301.9576948136091,
+                1304.4055458158255,
+                1303.9350509643555,
+                1301.2236915528774,
+                1302.1518662571907,
+                1301.2149930000305,
+                1301.8565624952316,
+                1305.7065196335316,
+                1303.7526607513428,
+                1301.5864789485931,
+                1301.8395751714706,
+                1303.1407725065947
+              ],
+              "wall_median_us": 1302.1518662571907,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1285.794906616211,
+                1287.529296875,
+                1287.0941162109375,
+                1287.4772644042969,
+                1287.0264434814453,
+                1287.8740692138672,
+                1286.4949035644531,
+                1286.9512939453125,
+                1285.9944152832031,
+                1288.4877014160156,
+                1290.1760864257812,
+                1286.6893005371094,
+                1288.7468719482422,
+                1287.9408264160156,
+                1286.8981170654297
+              ],
+              "median_us": 1287.0941162109375,
+              "wall_samples_us": [
+                1286.1769180744886,
+                1287.9307754337788,
+                1287.4639872461557,
+                1287.867184728384,
+                1287.3954884707928,
+                1288.3666716516018,
+                1286.8745904415846,
+                1287.3177882283926,
+                1286.3582000136375,
+                1289.1210708767176,
+                1291.0999450832605,
+                1287.1588952839375,
+                1289.5696610212326,
+                1288.463780656457,
+                1287.3160932213068
+              ],
+              "wall_median_us": 1287.4639872461557,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              -1.1953418143090104,
+              -1.2499656314707646,
+              -1.1809285011440291,
+              -1.0934907997062202,
+              -1.312993599680082,
+              -1.2143830755899896,
+              -1.1104030245850727,
+              -1.150943946548822,
+              -1.144058188683696,
+              -1.003229067696261,
+              -1.1521947541056508,
+              -1.2767705507072857,
+              -0.9546371528113862,
+              -1.035335079091667,
+              -1.2247185155994935
+            ],
+            "q256_latency_reduction_percent": -1.1521947541056508,
+            "q256_wall_latency_reduction_samples_percent": [
+              -1.1947550869846784,
+              -1.2480776519494317,
+              -1.1866336346425173,
+              -1.0940965227091213,
+              -1.321276755850508,
+              -1.2083810964153576,
+              -1.1150349239834643,
+              -1.152324481526257,
+              -1.1549499187889865,
+              -0.9879205224574281,
+              -1.1313279507055578,
+              -1.2891777020074013,
+              -0.9318471340155605,
+              -1.03811955879729,
+              -1.2292768938892915
+            ],
+            "q256_wall_latency_reduction_percent": -1.1549499187889865,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1296.7276763916016,
+                1292.1604919433594,
+                1292.9225158691406,
+                1333.3655548095703,
+                1291.6832733154297,
+                1291.8977355957031,
+                1293.2172393798828,
+                1292.6216888427734,
+                1290.3412628173828,
+                1292.802505493164,
+                1292.2340393066406,
+                1293.6688995361328,
+                1292.8440856933594,
+                1294.0948486328125,
+                1291.333236694336
+              ],
+              "median_us": 1292.802505493164,
+              "wall_samples_us": [
+                1297.0353569835424,
+                1292.3424132168293,
+                1293.1925151497126,
+                1333.618825301528,
+                1291.8866239488125,
+                1292.0480128377676,
+                1293.4612203389406,
+                1292.792810127139,
+                1290.5572447925806,
+                1293.0503115057945,
+                1292.4261204898357,
+                1293.8410881906748,
+                1293.0032145231962,
+                1294.247293844819,
+                1291.5349379181862
+              ],
+              "wall_median_us": 1293.0032145231962,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1332.4565124511719,
+                1323.9637756347656,
+                1295.3252410888672,
+                1294.239273071289,
+                1295.2240753173828,
+                1293.51806640625,
+                1339.79736328125,
+                1295.3544616699219,
+                1295.3756713867188,
+                1294.6592712402344,
+                1295.014877319336,
+                1294.570541381836,
+                1294.8980712890625,
+                1294.8892974853516,
+                1294.7417449951172
+              ],
+              "median_us": 1295.014877319336,
+              "wall_samples_us": [
+                1332.7828422188759,
+                1324.1210579872131,
+                1295.4881694167852,
+                1294.4819033145905,
+                1295.394878834486,
+                1293.7312945723534,
+                1339.9929460138083,
+                1295.5381721258163,
+                1295.536570250988,
+                1294.846385717392,
+                1295.2024675905704,
+                1294.8600761592388,
+                1295.0702849775553,
+                1295.0546760112047,
+                1294.948784634471
+              ],
+              "wall_median_us": 1295.2024675905704,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              2.681426052235202,
+              2.4021264234482835,
+              0.18549204041656756,
+              -3.023110374748001,
+              0.27337370185042953,
+              0.12526541782664088,
+              3.4766543940114545,
+              0.21096718373328102,
+              0.38864467509618494,
+              0.143417329046862,
+              0.21473405915240226,
+              0.06964795017973333,
+              0.15862141130987986,
+              0.06135264644490196,
+              0.26325777429800135
+            ],
+            "q256_latency_reduction_percent": 0.21096718373328102,
+            "q256_wall_latency_reduction_samples_percent": [
+              2.682168775208679,
+              2.39998031741073,
+              0.17720380017875087,
+              -3.023365709997593,
+              0.2708251316255031,
+              0.13011061428657608,
+              3.4725351214190745,
+              0.21190900104259047,
+              0.3843446470556013,
+              0.1387094431747865,
+              0.21435622384965594,
+              0.07869483254024745,
+              0.15961067737685594,
+              0.062343481039148434,
+              0.263627933150143
+            ],
+            "q256_wall_latency_reduction_percent": 0.21190900104259047,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "profiles": {
+          "q256": {
+            "selected": "q256",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.516000000000645,
+                "mean_us": 4.379000000000161
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.717000000000326,
+                "mean_us": 4.429250000000081
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.315999999999576,
+                "mean_us": 3.828999999999894
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 185.11800000000073,
+                "mean_us": 46.27950000000018
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 127.43600000000004,
+                "mean_us": 31.85900000000001
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 170.8380000000002,
+                "mean_us": 42.70950000000005
+              },
+              {
+                "name": "make_job_map.kd",
+                "count": 4,
+                "sum_us": 20.075999999999908,
+                "mean_us": 5.018999999999977
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route_weighted.kd",
+                "count": 4,
+                "sum_us": 3649.3500000000004,
+                "mean_us": 912.3375000000001
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1056.5639999999999,
+                "mean_us": 264.14099999999996
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "unweighted": {
+            "selected": "unweighted",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.115999999999246,
+                "mean_us": 4.278999999999812
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 16.51600000000036,
+                "mean_us": 4.12900000000009
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.436000000000092,
+                "mean_us": 3.859000000000023
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 189.11800000000034,
+                "mean_us": 47.279500000000084
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 115.43800000000039,
+                "mean_us": 28.859500000000097
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 174.43599999999958,
+                "mean_us": 43.608999999999895
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route.kd",
+                "count": 4,
+                "sum_us": 3890.7520000000004,
+                "mean_us": 972.6880000000001
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1058.9249999999997,
+                "mean_us": 264.73124999999993
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "flydsl": {
+            "selected": "flydsl",
+            "kernels": [
+              {
+                "name": "clear_workspace_kernel_0.kd",
+                "count": 4,
+                "sum_us": 17.636000000000138,
+                "mean_us": 4.4090000000000344
+              },
+              {
+                "name": "p0_scatter_kernel_1.kd",
+                "count": 4,
+                "sum_us": 16.756000000000085,
+                "mean_us": 4.189000000000021
+              },
+              {
+                "name": "p1_count_kernel_2.kd",
+                "count": 4,
+                "sum_us": 15.795999999999538,
+                "mean_us": 3.9489999999998844
+              },
+              {
+                "name": "p23_kernel_3.kd",
+                "count": 4,
+                "sum_us": 88.23799999999943,
+                "mean_us": 22.059499999999858
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 119.99800000000033,
+                "mean_us": 29.999500000000083
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 130.03700000000003,
+                "mean_us": 32.50925000000001
+              },
+              {
+                "name": "mfma_moe1_silu_mul_afp4_wfp4_fp4_t64x128x256_pm1_fp4q_sort_async_xcd4_v2out_v33.kd",
+                "count": 4,
+                "sum_us": 1604.81,
+                "mean_us": 401.2025
+              },
+              {
+                "name": "gemm2_a4w4_port_hmax8192_imax256_bm64_reduce_tk11_bhoist_apf_spart4x2_bf16lds_kst_v2_biasabi7_routeguard.kd",
+                "count": 4,
+                "sum_us": 2029.574,
+                "mean_us": 507.3935
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024.kd",
+                "count": 4,
+                "sum_us": 1355.3280000000002,
+                "mean_us": 338.83200000000005
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          }
+        },
+        "cross_provider": {
+          "exact_equal": true,
+          "nrms": 0.0,
+          "max_abs": 0.0
+        },
+        "weighted_unweighted_exact_equal": true,
+        "reference": {
+          "q256": {
+            "nrms": 0.002614568918943405,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          },
+          "flydsl": {
+            "nrms": 0.002614568918943405,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          }
+        },
+        "weighted_vs_unweighted": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1303.1182098388672,
+                1301.299819946289,
+                1301.54052734375,
+                1301.0906219482422,
+                1303.8134002685547,
+                1303.668212890625,
+                1302.7294158935547,
+                1302.9217529296875,
+                1303.8485717773438,
+                1305.3942108154297,
+                1305.472640991211,
+                1303.0561828613281,
+                1301.7681884765625,
+                1306.1742401123047,
+                1303.6746215820312
+              ],
+              "median_us": 1303.1182098388672,
+              "wall_samples_us": [
+                1303.5019487142563,
+                1301.6552943736315,
+                1301.9745890051126,
+                1301.5206903219223,
+                1304.6430237591267,
+                1304.2066432535648,
+                1303.1342718750238,
+                1303.3039588481188,
+                1304.2305316776037,
+                1306.150732561946,
+                1306.055225431919,
+                1303.5130500793457,
+                1302.160369232297,
+                1306.6107034683228,
+                1304.1060417890549
+              ],
+              "wall_median_us": 1303.5130500793457,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1323.1159973144531,
+                1323.4152221679688,
+                1322.8519439697266,
+                1323.9656066894531,
+                1325.4031372070312,
+                1323.3223724365234,
+                1323.026351928711,
+                1323.7216186523438,
+                1323.6199951171875,
+                1323.311996459961,
+                1324.5880126953125,
+                1324.3180084228516,
+                1323.1871795654297,
+                1322.3643493652344,
+                1323.9959716796875
+              ],
+              "median_us": 1323.4152221679688,
+              "wall_samples_us": [
+                1323.5216680914164,
+                1323.782168328762,
+                1323.2244737446308,
+                1324.4235515594482,
+                1326.0313216596842,
+                1323.7561658024788,
+                1323.428563773632,
+                1324.1044618189335,
+                1324.0442611277103,
+                1323.9649683237076,
+                1325.4196476191282,
+                1324.9907363206148,
+                1323.693972080946,
+                1322.743073105812,
+                1324.5283626019955
+              ],
+              "wall_median_us": 1323.9649683237076,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              1.5114160448649796,
+              1.671085676757675,
+              1.611020547168979,
+              1.7277627625395295,
+              1.628918502786386,
+              1.4852132749566433,
+              1.5341293849187,
+              1.5713172187844302,
+              1.4937386419652323,
+              1.354010671139063,
+              1.4431182768448143,
+              1.6054924441331457,
+              1.6187423381703079,
+              1.2243304396932144,
+              1.5348498433779652
+            ],
+            "q256_latency_reduction_percent": 1.5348498433779652,
+            "q256_wall_latency_reduction_samples_percent": [
+              1.5126098695482255,
+              1.6714890474061255,
+              1.6059168463973847,
+              1.7292701576137683,
+              1.6129557086017807,
+              1.476822020093313,
+              1.5334633431774318,
+              1.5709110248175493,
+              1.4964552191956892,
+              1.345521685843134,
+              1.4610031035826079,
+              1.6209687851034187,
+              1.6267810613956781,
+              1.2196147510045452,
+              1.5418560590746107
+            ],
+            "q256_wall_latency_reduction_percent": 1.5418560590746107,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1305.6449890136719,
+                1299.7376251220703,
+                1298.9872741699219,
+                1299.7377014160156,
+                1299.3089294433594,
+                1298.6792755126953,
+                1299.9232482910156,
+                1298.7721252441406,
+                1297.6996612548828,
+                1333.7580871582031,
+                1298.3152770996094,
+                1298.5308837890625,
+                1301.6344451904297,
+                1299.334487915039,
+                1297.8268432617188
+              ],
+              "median_us": 1299.3089294433594,
+              "wall_samples_us": [
+                1305.8321177959442,
+                1299.8933158814907,
+                1299.2450315505266,
+                1300.0062014907598,
+                1299.4908168911934,
+                1298.8466210663319,
+                1300.1285027712584,
+                1298.9617325365543,
+                1297.8640478104353,
+                1333.9261151850224,
+                1298.4858267009258,
+                1298.6974138766527,
+                1301.8904812633991,
+                1299.4944211095572,
+                1298.0880308896303
+              ],
+              "wall_median_us": 1299.4908168911934,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1324.195556640625,
+                1319.1561889648438,
+                1319.4902801513672,
+                1319.0666961669922,
+                1320.1878356933594,
+                1319.3987274169922,
+                1319.0974426269531,
+                1320.1419067382812,
+                1319.359130859375,
+                1319.3158721923828,
+                1320.0470733642578,
+                1318.4014892578125,
+                1319.1686248779297,
+                1319.4862365722656,
+                1354.9420928955078
+              ],
+              "median_us": 1319.3987274169922,
+              "wall_samples_us": [
+                1324.485158547759,
+                1319.3113170564175,
+                1319.8428321629763,
+                1319.5185083895922,
+                1320.502022281289,
+                1319.6465373039246,
+                1319.286935031414,
+                1320.3265238553286,
+                1319.5025362074375,
+                1319.4744288921356,
+                1320.2578201889992,
+                1318.6966348439455,
+                1319.3202205002308,
+                1319.6382392197847,
+                1355.0843205302954
+              ],
+              "wall_median_us": 1319.6382392197847,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              1.4008933600422573,
+              1.4720443269125998,
+              1.5538580533608237,
+              1.465353860206136,
+              1.581510273425179,
+              1.5703707661488862,
+              1.4535843764318517,
+              1.6187488167040813,
+              1.641665949617836,
+              -1.0946745408149192,
+              1.6462894924847653,
+              1.5071740763836712,
+              1.3291841055666813,
+              1.5272420506314914,
+              4.215327720148831
+            ],
+            "q256_latency_reduction_percent": 1.5272420506314914,
+            "q256_wall_latency_reduction_samples_percent": [
+              1.4083238782582583,
+              1.4718285914693165,
+              1.5606252585918652,
+              1.4787444643460241,
+              1.5911528369942907,
+              1.5761732895603635,
+              1.4521808525072288,
+              1.6181445220375816,
+              1.6398974464419263,
+              -1.0952608081250002,
+              1.6490713522118443,
+              1.51658997519619,
+              1.3211151444509082,
+              1.5264651714046495,
+              4.206106496631905
+            ],
+            "q256_wall_latency_reduction_percent": 1.5264651714046495,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "elapsed_seconds": 16.001045778393745
+      },
+      {
+        "name": "routing/rank0/layer-call049.pt",
+        "metadata": {
+          "rank": 0,
+          "call_index": 49,
+          "pid": 943,
+          "labels": [
+            {
+              "type": "RoutedExperts",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            },
+            {
+              "type": "MoERunner",
+              "field": "layer_name",
+              "value": "model.layers.49.mlp.experts"
+            }
+          ],
+          "tokens": 8192,
+          "model_dim": 8192,
+          "inter_dim": 256,
+          "experts": 513,
+          "topk": 11,
+          "block_m": 256,
+          "input_dtype": "torch.bfloat16",
+          "input_shape": [
+            8192,
+            8192
+          ],
+          "input_stride": [
+            8192,
+            1
+          ],
+          "routes_dtype": "torch.int32",
+          "weights_dtype": "torch.float32",
+          "sorted_capacity": 221440,
+          "valid_sorted_rows": 180992,
+          "producer": "{'kernelName': 'fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate', 'activation': <ActivationType.Silu: 0>, 'quant_type': <QuantType.per_1x32: 3>, 'xbf16': False, 'flat': 0}",
+          "routes_sha256": "d8d209b256c1536713b19d181f0f49d4b6d3ec27d4dd3eb5abc111a1558ae302",
+          "weights_sha256": "d9ca96b22e925be65deda646b71fd54067579fc7359aa8bc3d8f92a901768975"
+        },
+        "routing_sha256": "d8d209b256c1536713b19d181f0f49d4b6d3ec27d4dd3eb5abc111a1558ae302",
+        "routing_weights_sha256": "d9ca96b22e925be65deda646b71fd54067579fc7359aa8bc3d8f92a901768975",
+        "timings": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1285.9623718261719,
+                1287.6136016845703,
+                1288.2544708251953,
+                1287.0735931396484,
+                1286.3087463378906,
+                1287.7608489990234,
+                1287.2416687011719,
+                1287.3664093017578,
+                1286.7400360107422,
+                1284.6279907226562,
+                1286.1180114746094,
+                1287.0539855957031,
+                1284.8676300048828,
+                1286.8608093261719,
+                1287.3088073730469
+              ],
+              "median_us": 1287.0539855957031,
+              "wall_samples_us": [
+                1286.2829118967056,
+                1287.9852950572968,
+                1288.787368685007,
+                1287.4246947467327,
+                1286.7769878357649,
+                1288.1508748978376,
+                1287.7353932708502,
+                1287.7358961850405,
+                1287.205284461379,
+                1284.9889323115349,
+                1286.7255881428719,
+                1287.5217944383621,
+                1285.2904200553894,
+                1287.219077348709,
+                1287.7237889915705
+              ],
+              "wall_median_us": 1287.4246947467327,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1271.5023040771484,
+                1270.7983016967773,
+                1272.219123840332,
+                1274.6611022949219,
+                1270.9382247924805,
+                1272.1495056152344,
+                1271.7090606689453,
+                1273.3427047729492,
+                1271.4247131347656,
+                1273.2403182983398,
+                1274.016342163086,
+                1273.0087280273438,
+                1271.579475402832,
+                1272.7603149414062,
+                1272.3411178588867
+              ],
+              "median_us": 1272.219123840332,
+              "wall_samples_us": [
+                1271.9881068915129,
+                1271.1419351398945,
+                1272.6137042045593,
+                1275.1042656600475,
+                1271.2898291647434,
+                1272.5311052054167,
+                1272.0672227442265,
+                1273.7000919878483,
+                1271.842708811164,
+                1273.6047897487879,
+                1274.568885564804,
+                1273.4756898134947,
+                1271.9547096639872,
+                1273.1575034558773,
+                1272.7112881839275
+              ],
+              "wall_median_us": 1272.6137042045593,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              -1.1372427484131458,
+              -1.323207621960234,
+              -1.260423356666644,
+              -0.9737875284951348,
+              -1.209383843020369,
+              -1.2271626341779016,
+              -1.2213963486315091,
+              -1.1013299464663107,
+              -1.2045796119705598,
+              -0.8943851573547248,
+              -0.9498833657798018,
+              -1.1033119615859923,
+              -1.0450117243234947,
+              -1.107867225213945,
+              -1.1763896728691745
+            ],
+            "q256_latency_reduction_percent": -1.1372427484131458,
+            "q256_wall_latency_reduction_samples_percent": [
+              -1.1238159325346548,
+              -1.3250573717834733,
+              -1.2709013290531108,
+              -0.9662291483518494,
+              -1.2182240678505827,
+              -1.227456808601905,
+              -1.2317093190108956,
+              -1.101970886669772,
+              -1.2078990227160313,
+              -0.8938520531940263,
+              -0.9537893726850816,
+              -1.102973911258922,
+              -1.0484422354098712,
+              -1.1044645972444778,
+              -1.1795684494214516
+            ],
+            "q256_wall_latency_reduction_percent": -1.1238159325346548,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1290.8509063720703,
+                1287.301254272461,
+                1286.8852233886719,
+                1285.9320068359375,
+                1285.7168579101562,
+                1286.602783203125,
+                1285.2063751220703,
+                1285.5155944824219,
+                1285.9983825683594,
+                1285.768814086914,
+                1284.8612213134766,
+                1285.4144287109375,
+                1285.2667236328125,
+                1285.3123474121094,
+                1285.1312255859375
+              ],
+              "median_us": 1285.7168579101562,
+              "wall_samples_us": [
+                1291.2006303668022,
+                1287.4661851674318,
+                1287.042386829853,
+                1286.0900163650513,
+                1285.9227135777473,
+                1286.7323122918606,
+                1285.507818683982,
+                1285.8425080776215,
+                1286.1626967787743,
+                1285.9338149428368,
+                1285.0198335945606,
+                1285.5795118957758,
+                1285.418914631009,
+                1285.470426082611,
+                1285.3168230503798
+              ],
+              "wall_median_us": 1285.9227135777473,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1278.8887405395508,
+                1273.544692993164,
+                1273.1422805786133,
+                1274.015884399414,
+                1273.6127090454102,
+                1274.267921447754,
+                1273.8647079467773,
+                1273.0447387695312,
+                1273.6283493041992,
+                1273.2150650024414,
+                1273.9447021484375,
+                1273.8359069824219,
+                1272.8227233886719,
+                1273.2999420166016,
+                1273.4546661376953
+              ],
+              "median_us": 1273.6127090454102,
+              "wall_samples_us": [
+                1279.2346999049187,
+                1273.7244926393032,
+                1273.303898051381,
+                1274.2106709629297,
+                1273.768087849021,
+                1274.4240742176771,
+                1274.0256916731596,
+                1273.2225842773914,
+                1273.8036829978228,
+                1273.5080812126398,
+                1274.098176509142,
+                1273.990785703063,
+                1272.9811947792768,
+                1273.4555825591087,
+                1273.6343871802092
+              ],
+              "wall_median_us": 1273.768087849021,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              -0.9353562552652398,
+              -1.080178917550616,
+              -1.079450664682407,
+              -0.9353197697484624,
+              -0.9503790892459228,
+              -0.967995940865944,
+              -0.8903353004867789,
+              -0.9796085976479038,
+              -0.9712435555409925,
+              -0.9859881044094136,
+              -0.8569068301496097,
+              -0.9089492347522122,
+              -0.9776695540923885,
+              -0.9434073621713235,
+              -0.9169199154655759
+            ],
+            "q256_latency_reduction_percent": -0.9503790892459228,
+            "q256_wall_latency_reduction_samples_percent": [
+              -0.9353975828495689,
+              -1.0788590945326224,
+              -1.0789638514023903,
+              -0.9322905287823592,
+              -0.9542259571953625,
+              -0.9657882586484445,
+              -0.901247681727908,
+              -0.9911797007113549,
+              -0.9702447830787615,
+              -0.9757090601549318,
+              -0.8572068688884381,
+              -0.9096397181803355,
+              -0.977054484602095,
+              -0.9434835174508074,
+              -0.9172519199984212
+            ],
+            "q256_wall_latency_reduction_percent": -0.9542259571953625,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "profiles": {
+          "q256": {
+            "selected": "q256",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.39699999999914,
+                "mean_us": 4.349249999999785
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 17.437000000000523,
+                "mean_us": 4.359250000000131
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.076000000000647,
+                "mean_us": 3.7690000000001618
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 179.2370000000003,
+                "mean_us": 44.80925000000008
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 124.99699999999973,
+                "mean_us": 31.249249999999932
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 160.23699999999997,
+                "mean_us": 40.05924999999999
+              },
+              {
+                "name": "make_job_map.kd",
+                "count": 4,
+                "sum_us": 22.996999999999616,
+                "mean_us": 5.749249999999904
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route_weighted.kd",
+                "count": 4,
+                "sum_us": 3559.428000000001,
+                "mean_us": 889.8570000000002
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1057.9240000000007,
+                "mean_us": 264.48100000000017
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "unweighted": {
+            "selected": "unweighted",
+            "kernels": [
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >, aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs>(aiter::MoeSortingClearWorkspaceKernel<aiter::MoeSortingClearWorkspaceProblem<false, 1024, 1> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 16.875999999999806,
+                "mean_us": 4.2189999999999515
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P0_v1<aiter::MoeSortingProblemMp<int, float, unsigned char, 4, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 16.156000000000518,
+                "mean_us": 4.039000000000129
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P1<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 15.1959999999996,
+                "mean_us": 3.7989999999999
+              },
+              {
+                "name": "void aiter::opus_moe_sorting_entry<aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >, aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs>(aiter::MoeSortingMultiPhaseKernel_P23<aiter::MoeSortingProblemMp<int, float, unsigned char, 16, false, false, true> >::Kargs) [clone .kd]",
+                "count": 4,
+                "sum_us": 175.99700000000024,
+                "mean_us": 43.99925000000006
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 120.91899999999913,
+                "mean_us": 30.229749999999783
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 163.67600000000016,
+                "mean_us": 40.91900000000004
+              },
+              {
+                "name": "fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route.kd",
+                "count": 4,
+                "sum_us": 3783.5119999999997,
+                "mean_us": 945.8779999999999
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024_nt.kd",
+                "count": 4,
+                "sum_us": 1062.0839999999998,
+                "mean_us": 265.52099999999996
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          },
+          "flydsl": {
+            "selected": "flydsl",
+            "kernels": [
+              {
+                "name": "clear_workspace_kernel_0.kd",
+                "count": 4,
+                "sum_us": 17.396000000000043,
+                "mean_us": 4.349000000000011
+              },
+              {
+                "name": "p0_scatter_kernel_1.kd",
+                "count": 4,
+                "sum_us": 16.996000000000095,
+                "mean_us": 4.249000000000024
+              },
+              {
+                "name": "p1_count_kernel_2.kd",
+                "count": 4,
+                "sum_us": 15.87700000000035,
+                "mean_us": 3.9692500000000877
+              },
+              {
+                "name": "p23_kernel_3.kd",
+                "count": 4,
+                "sum_us": 87.39700000000016,
+                "mean_us": 21.84925000000004
+              },
+              {
+                "name": "void aiter::dynamic_per_group_scaled_quant_kernel<std::bfloat16_t, opus::fp4_t, 32, 32, false, 64, true, false, 0, false, false, false, false, false>(opus::fp4_t*, float*, std::bfloat16_t const*, float const*, long, int, int, long, int const*, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 121.9960000000001,
+                "mean_us": 30.499000000000024
+              },
+              {
+                "name": "void aiter::mxfp4_moe_sort_kernel<256, 32, 32, 32>(unsigned char*, unsigned char*, int const*, int const*, int, int, int, int, int) [clone .kd]",
+                "count": 4,
+                "sum_us": 131.71699999999953,
+                "mean_us": 32.92924999999988
+              },
+              {
+                "name": "mfma_moe1_silu_mul_afp4_wfp4_fp4_t64x128x256_pm1_fp4q_sort_async_xcd4_v2out_v33.kd",
+                "count": 4,
+                "sum_us": 1583.6520000000005,
+                "mean_us": 395.9130000000001
+              },
+              {
+                "name": "gemm2_a4w4_port_hmax8192_imax256_bm64_reduce_tk11_bhoist_apf_spart4x2_bf16lds_kst_v2_biasabi7_routeguard.kd",
+                "count": 4,
+                "sum_us": 2010.4940000000004,
+                "mean_us": 502.6235000000001
+              },
+              {
+                "name": "moe_reduction_bf16_bf16_t11_n8192_m0e0_w0_s8_r8192_b1024.kd",
+                "count": 4,
+                "sum_us": 1352.8880000000004,
+                "mean_us": 338.2220000000001
+              }
+            ],
+            "timing_mode": "separate instrumented diagnostic; not steady-state latency"
+          }
+        },
+        "cross_provider": {
+          "exact_equal": true,
+          "nrms": 0.0,
+          "max_abs": 0.0
+        },
+        "weighted_unweighted_exact_equal": true,
+        "reference": {
+          "q256": {
+            "nrms": 0.0026266288477927446,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          },
+          "flydsl": {
+            "nrms": 0.0026266288477927446,
+            "max_abs": 0.0078125,
+            "sample_tokens": 64
+          }
+        },
+        "weighted_vs_unweighted": {
+          "eager": {
+            "q256": {
+              "mode": "eager",
+              "samples_us": [
+                1286.5495300292969,
+                1285.2816009521484,
+                1286.5348052978516,
+                1286.4875793457031,
+                1287.6155853271484,
+                1286.8955993652344,
+                1286.1643981933594,
+                1286.9548034667969,
+                1286.650390625,
+                1286.6928100585938,
+                1284.7924041748047,
+                1287.6424407958984,
+                1286.4971923828125,
+                1286.2323760986328,
+                1285.4548645019531
+              ],
+              "median_us": 1286.5348052978516,
+              "wall_samples_us": [
+                1286.9674991816282,
+                1285.6691144406796,
+                1286.8871912360191,
+                1286.827800795436,
+                1287.982389330864,
+                1287.2597761452198,
+                1286.545293405652,
+                1287.3247917741537,
+                1287.0390806347132,
+                1287.0702799409628,
+                1285.1642351597548,
+                1288.0021799355745,
+                1286.8468929082155,
+                1286.5801062434912,
+                1285.8067266643047
+              ],
+              "wall_median_us": 1286.8871912360191,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "eager",
+              "samples_us": [
+                1320.8934783935547,
+                1320.7015228271484,
+                1320.2071380615234,
+                1320.3514862060547,
+                1321.0623168945312,
+                1321.1503601074219,
+                1320.5127716064453,
+                1320.5415344238281,
+                1320.5071258544922,
+                1321.2619018554688,
+                1321.0270690917969,
+                1320.3546905517578,
+                1320.7723236083984,
+                1320.3339385986328,
+                1320.5287170410156
+              ],
+              "median_us": 1320.5415344238281,
+              "wall_samples_us": [
+                1321.241995319724,
+                1321.089193224907,
+                1320.544108748436,
+                1320.6956069916487,
+                1321.4215077459812,
+                1321.5530011802912,
+                1320.8724185824394,
+                1320.9145981818438,
+                1320.9868036210537,
+                1321.5984962880611,
+                1321.3708996772766,
+                1320.7015953958035,
+                1321.2107215076685,
+                1320.672808215022,
+                1320.874998345971
+              ],
+              "wall_median_us": 1320.9868036210537,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              2.6000543515459147,
+              2.6819020999671936,
+              2.550534063398065,
+              2.5647645505105103,
+              2.5318057399447476,
+              2.59279804755927,
+              2.6011390538313433,
+              2.5434058741428105,
+              2.5639191615557317,
+              2.6163693775116865,
+              2.7429161570401006,
+              2.4775350131251006,
+              2.5950824841593456,
+              2.5827982984512605,
+              2.6560461795677184
+            ],
+            "q256_latency_reduction_percent": 2.59279804755927,
+            "q256_wall_latency_reduction_samples_percent": [
+              2.5941119234407815,
+              2.681126979607147,
+              2.548715888355721,
+              2.564391523445639,
+              2.530541407045519,
+              2.594918630160408,
+              2.5988221643409934,
+              2.54292037153078,
+              2.5698760118786903,
+              2.61261014173948,
+              2.7400833881209845,
+              2.4759124676024316,
+              2.600934736605793,
+              2.5814646716024607,
+              2.6549273569095972
+            ],
+            "q256_wall_latency_reduction_percent": 2.5941119234407815,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          },
+          "graph": {
+            "q256": {
+              "mode": "graph",
+              "samples_us": [
+                1286.5132141113281,
+                1279.4586944580078,
+                1279.5843124389648,
+                1279.4511413574219,
+                1280.89111328125,
+                1280.8806991577148,
+                1279.500732421875,
+                1279.9307250976562,
+                1277.9831314086914,
+                1277.3843002319336,
+                1280.6379318237305,
+                1278.0539321899414,
+                1276.969108581543,
+                1280.1243591308594,
+                1278.5139465332031
+              ],
+              "median_us": 1279.500732421875,
+              "wall_samples_us": [
+                1286.685997620225,
+                1279.6406913548708,
+                1279.7571159899235,
+                1279.612397775054,
+                1281.068790704012,
+                1281.051179394126,
+                1279.6726077795029,
+                1280.1145855337381,
+                1278.151012957096,
+                1277.558533474803,
+                1280.8098830282688,
+                1278.2405223697424,
+                1277.1398480981588,
+                1280.340887606144,
+                1278.677610680461
+              ],
+              "wall_median_us": 1279.6726077795029,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "flydsl": {
+              "mode": "graph",
+              "samples_us": [
+                1333.3767700195312,
+                1327.8912353515625,
+                1328.7220001220703,
+                1328.689193725586,
+                1328.8323974609375,
+                1328.4864044189453,
+                1329.2855834960938,
+                1328.350830078125,
+                1329.2071533203125,
+                1329.1107940673828,
+                1327.8816223144531,
+                1328.5879516601562,
+                1329.5331573486328,
+                1329.6675872802734,
+                1328.6483764648438
+              ],
+              "median_us": 1328.7220001220703,
+              "wall_samples_us": [
+                1333.633828908205,
+                1328.058810904622,
+                1328.8988918066025,
+                1328.8585096597672,
+                1328.9955910295248,
+                1328.654196113348,
+                1329.451883211732,
+                1328.5211101174355,
+                1329.3631840497255,
+                1329.3007854372263,
+                1328.0386291444302,
+                1328.740082681179,
+                1329.6928815543652,
+                1329.8296742141247,
+                1328.8087863475084
+              ],
+              "wall_median_us": 1328.8988918066025,
+              "repeats": 15,
+              "iterations_per_repeat": 50,
+              "scope": "full MoE; each sample averages two paired blocks; setup, correctness/reference checks, and profiling are excluded"
+            },
+            "paired_order": [
+              {
+                "sample": 1,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 2,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 3,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 4,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 5,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 6,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 7,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 8,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 9,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 10,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 11,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 12,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 13,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              },
+              {
+                "sample": 14,
+                "pattern": "ABBA",
+                "blocks": [
+                  "q256",
+                  "flydsl",
+                  "flydsl",
+                  "q256"
+                ]
+              },
+              {
+                "sample": 15,
+                "pattern": "BAAB",
+                "blocks": [
+                  "flydsl",
+                  "q256",
+                  "q256",
+                  "flydsl"
+                ]
+              }
+            ],
+            "q256_latency_reduction_samples_percent": [
+              3.5146521944818843,
+              3.6473274018358928,
+              3.6981165118505728,
+              3.705761482871907,
+              3.607775086707034,
+              3.5834544563557125,
+              3.7452336572613594,
+              3.6451292748935153,
+              3.8537275234838524,
+              3.8918120345072458,
+              3.557823957859925,
+              3.803588569884992,
+              3.9535718591564537,
+              3.725986000061165,
+              3.7733406986906584
+            ],
+            "q256_latency_reduction_percent": 3.705761482871907,
+            "q256_wall_latency_reduction_samples_percent": [
+              3.5202939720278748,
+              3.6457812825902445,
+              3.697931883280606,
+              3.705895814093996,
+              3.6062422365438946,
+              3.582799562028481,
+              3.744345775942691,
+              3.643639849984649,
+              3.85238373584399,
+              3.8924412389784715,
+              3.5562780388841393,
+              3.800559715902966,
+              3.9522685414976153,
+              3.721437983193343,
+              3.7726402912222508
+            ],
+            "q256_wall_latency_reduction_percent": 3.705895814093996,
+            "paired_reduction_scope": "per-sample FlyDSL minus Q256 divided by FlyDSL; median across paired samples"
+          }
+        },
+        "elapsed_seconds": 15.823939583264291
+      }
+    ],
+    "original_configs": {
+      "q256": {
+        "path": "/opt/aiter-configs/qwen3_8_2400b_fp4_a124_tuned_fmoe_q256.csv",
+        "sha256": "188f7b9e9cbb514a6988a373b3256444d028e2911fd1fe3722a16ba60be7cf87"
+      },
+      "flydsl": {
+        "path": "/usr/local/lib/python3.12/dist-packages/aiter/configs/model_configs/qwen3_8_2400b_fp4_tuned_fmoe.csv",
+        "sha256": "bee2b46b856d17571ee0e641d69092f2be596db3fe09bddce2396ad8802d25d7"
+      }
+    }
+  },
+  "deployment": {
+    "abi_version": 2,
+    "hashes": {
+      "/usr/local/lib/python3.12/dist-packages/aiter/ops/moe_op.py": "c8ad6e5dea7d2d79604e737092e7312ea732a583bc7a548fa3efe43d4c8ba2f2",
+      "/usr/local/lib/python3.12/dist-packages/aiter/ops/triton/_triton_kernels/moe/q256_schedule.py": "bd4b852173632480196751d98c22327cbad175a0ff684dc963c965c48187f835",
+      "/usr/local/lib/python3.12/dist-packages/aiter_meta/csrc/include/q256_producer_args.hpp": "63d2e9b064be97fc878c009e5fb9342920a570faa5c54bf54f9fdc02eb37ec73",
+      "/usr/local/lib/python3.12/dist-packages/aiter_meta/csrc/py_itfs_cu/asm_fmoe_q256.cu": "4ae6d3a899dbd1063647505a2eb69610967758dda83b6188eaff96e891d54c1e",
+      "/usr/local/lib/python3.12/dist-packages/aiter/jit/module_moe_q256_asm.so": "cf3f36a1e33f2ca90d5b48bd37a8ba6a2a7f899d9322ce9106ed03dcc96116a8",
+      "/usr/local/lib/python3.12/dist-packages/aiter_meta/hsa/gfx950/fmoe/silu/fused_moe_mxfp4_prefill_1tg_4w_256mx1_128nx1_ps_fp32gate_route_weighted.co": "96e877979784bac87588f44f02ee66bbab052b1c7bf6cbb17bd5c33ca4800f25"
+    },
+    "fallback_sha256": "09dd5fabc0e5249f29b0a01fb25a17ceb027208fa7318ccd68eef0434f8bc375",
+    "routing_sha256": {
+      "layer-call062.pt": "549a84e9d2f2a131ee4ebba2b5fa98d19c5b26939a83d8acb8ae46f7547b88ac",
+      "layer-call041.pt": "486455f8e1c3fda4d04a32a25f3e07b5bc5e78af872e2c9faba2d07f81fa0018",
+      "layer-call026.pt": "fdb1db7f47c68ac7e8f4b89aa849ff80ea9bb5a4bd8171d9b14ffedd97ffcaf8",
+      "layer-call086.pt": "65e757621b3c4244ab62b9e6696a5985c2de3eae099c9f0dc6d098c51306a287",
+      "layer-call032.pt": "1b49e45f70949c80af51ceb323c2e4f89f1e924febfacebeaa0c142a429a1565",
+      "layer-call049.pt": "47988119c065cbd7c7f53e7bb1a527f5058aca1b90baf6723fec93cd1c194f22",
+      "layer-call066.pt": "cbebeb5eb6256de951218a404d6bba8944fc606d30eb71870d250fe82e7ba76d",
+      "layer-call079.pt": "bc4a1e9a7894f2d4302d081c07544425870e79e875ff18a7e76c7b1d71ecea27",
+      "layer-call008.pt": "fd619c88d19ac496b730237de1ff209c0af9a0310ff8e33b00eed25aeed3eab3",
+      "layer-call028.pt": "bec6492fda8baad2e1c0738be40ba73f2531c5308c66cfeedddf0bb70d283f94",
+      "layer-call078.pt": "304686161a818f9bee18306be8d8ef6eed08aefdbd4b1a876cdc6678fe2287ca",
+      "layer-call063.pt": "428440189da917b16c41c7e32a182c5ea8edc818524f16c7ddf2d51dd13c3065",
+      "layer-call047.pt": "340c34d6e39279f36a6009e6336ccea395cc578edf17b84b29f77a1fc6b647d9",
+      "layer-call042.pt": "fabe7728d917bbf74e8e97075f33d6eb7a49dc938869c6a53a6bc0a91cda2540",
+      "layer-call010.pt": "b812954dd8995d756a23d93eaba168f2891d8c0911d1c047db70da143c0e95f8",
+      "layer-call085.pt": "b86db7493a6d370f245d90703dffca499127c02b4283b6f46538528157188553",
+      "layer-call001.pt": "11ef2c5ca4a8412285beee2072380a6dfe4dd65f1ba5a80f26794cf3ce7d7a72",
+      "layer-call091.pt": "f98bba0bfcda05cee990de03bd356192caea087ad33bf99e14e07e6d4a0e66ac",
+      "layer-call082.pt": "1f0c09c4cc8d345eb5626318fc5d8bc4c0694461ed522ba1a67aa3165dbb6b86",
+      "layer-call067.pt": "c42fd2fd79dc3e9575a354a79644f2d2cbcd27065ffdf0e8efa9da7b98533302",
+      "layer-call022.pt": "2a2e1edb446234015a9429eec2b4d1afcc442d5cff425df0f45285f1853f41c5",
+      "layer-call037.pt": "9b8963ef8b87c7a64184a7b4bfba8e17f88d6950542e430a8a4dbfc94059b0b8",
+      "layer-call030.pt": "8db4294b9f37afb3d1801ab93863c7add24ab010df51bb2aaa73cc0f5ba39aa8",
+      "layer-call031.pt": "f68c4189cbc2ca58e7e5d10f32030eade3e09b179224af2f7a81788e65e1f2e7",
+      "layer-call072.pt": "d40a5544b84886e79f65df90243709422dd527c451d8f6a8d47cf93b221740a5",
+      "layer-call090.pt": "85145a8a07e34a22e1ca13f2f41129a72d6c75b74d0f32a53ea15bda8ebf302f",
+      "layer-call075.pt": "0bb8d6a46ed83145309f9e8736692cee66fd49f171d947e2687c117499cebbd6",
+      "layer-call024.pt": "5c1ec682ae78b0528079e584be7b1c647660fc776024f6eebae9a93485973673",
+      "layer-call003.pt": "bbc22a73d95d22a800b2e743c4d43e009021f3ef87dddc5459c4dffc2f0ca0ea",
+      "layer-call017.pt": "5097a9c631c5109183bdda5238e2b4f69cecc3d703b3771ac6978bc5f7439a9f",
+      "layer-call089.pt": "61aca73df7b5aeeeef8cd999b33408c0869c704e4322d98201c61d4ef3cca148",
+      "layer-call077.pt": "b390fb09322ff1ed5ef4efa7f59c9aebdb8347eb347c9f22843e54f059395088",
+      "layer-call014.pt": "1ff52a7214fc0a77f69ea01c2ce7a10f9a5372a5c7be4d7366b31722bb27b305",
+      "layer-call035.pt": "793a33982492731b2af1cc5680abb78c3139ab6b3e70de144a486f581e9bf643",
+      "layer-call005.pt": "dcacfc9c898787f4086935e66b1fef282a165bea85f6498fb7db6dfe9975d30a",
+      "layer-call052.pt": "1b05c18a03a423337f2c5c75f4a851c6f7434c15a0de36615ea53aa13cd476c5",
+      "layer-call065.pt": "4a877e30c1e5799f830c695e7cd2b45eed77d37a51c67667e082ac099908852d",
+      "layer-call080.pt": "be897d88a1e4995a39e81440fe1c2c52bdb60b5892da80adb644774d7dd4c748",
+      "layer-call071.pt": "26c3b40c209c04442ee6874f4b03e43ee171d91dcef8fbe084dd73b96e83e972",
+      "layer-call016.pt": "fb5d1f7c5cfac009e9f39f2474113e6141b11ca9eed2505890c16bbac7d7599d",
+      "layer-call045.pt": "2672976e3e88edcd479a2497e493471457eb440fbfed76fdba32f9d9f4c33278",
+      "layer-call034.pt": "95b201d582a5dbf1debaa387b726f40db87311f1ce8b1d612b7d3105b4fbdc3c",
+      "layer-call081.pt": "644f717fc0a46f9cbc3b8aa52c5ce82ccfcd97107deaea71f580cb06609b928e",
+      "layer-call004.pt": "1cff764d6510b48f722aeddf3e6af10a49f50393f683ce9efb7a71733dff8d5f",
+      "layer-call027.pt": "f69cdee35d2f91b98e920c7acd434cfd2a63fb6ee4a3a7db602f2ed65519202d",
+      "layer-call068.pt": "2e898d5ecca3b10913f8f731c8ab46cb7b3ecaea1905d9fdae9f728b699fe5ff",
+      "layer-call053.pt": "f06f24b73e63f47a29591aec52706bc58992cf38701e89f676ca06c73ddc3717",
+      "layer-call048.pt": "ba53acb42246945f5a5ae1fa443c352ee07d970b6aa142ad02cd603b8e6753a7",
+      "layer-call073.pt": "763e78cd3dbf9586efc031a7f484d155c3861e8c1e30ae6bfcaefe32a19a4cdc",
+      "layer-call058.pt": "ae653f6d5d6cde44dec76c6fc45da1f92db611e1b5c303f753955ae7955bcf7b",
+      "layer-call000.pt": "d53425de6255ac8b12a3afc56dbe9a15daa17aa92dbb2025a4f4bfe4988feb8b",
+      "layer-call011.pt": "2caff0cbd113309bdbf17128590e8d282bec306172cae6789fc8f529364eb95e",
+      "layer-call050.pt": "c3ca0c7479da43eaa85abaee58e6429f3fe3651ce13354fe18354ada150951b5",
+      "layer-call084.pt": "c20002533b4d2692f5a2b19779894bd282b7d0d08846b7b637d913a1862c1c87",
+      "layer-call069.pt": "5d6394fc9d75dfaf68014d97f725cbdb03e6476ab5e4648e769b6683a8057f5a",
+      "layer-call070.pt": "9b81c87981271277fcf321671f4d66cc6c11df83f31873e4b2b97e3aa0192503",
+      "layer-call057.pt": "e6b04ad84583ee168c320747d8a3d601fef6414e3c422dcb4f4c558cc5795369",
+      "layer-call006.pt": "c12a790b749a05fd5c08076522dd9f9c9a021feba3e2ec5edaca466874cbfaaf",
+      "layer-call023.pt": "e42f5b4ca7070d22547e786a9e9b71683098a7025ab225a0f2de7ab26590eae9",
+      "layer-call025.pt": "c166c740c7d2b617a8cbf8fbb4e7ebbc7a33bbb8752226679930831c14ad2018",
+      "layer-call060.pt": "39f3cbff47fcb2a58b12e8eb57815a22259601e41d0a9a7c02a9d85b11549bcf",
+      "layer-call046.pt": "c69a03307edb169e45abf7102ed96d90f3cf6114d3c66b3ec51d64db43f19e68",
+      "layer-call039.pt": "9c59d5fb55d0637155abb0750f69d913cfab3e2d7a2b57390f1e5b4daeccdc9e",
+      "layer-call040.pt": "4716f1c33ec18833c1ce412653ab50a68f6eb3d87fecbabeba38dc628bec98b2",
+      "layer-call002.pt": "e97d942cf17bc7b3a291dc7300629aca0608bd06ddb08342187f2da88c591506",
+      "layer-call061.pt": "690d27fb0538a60ccfc576d60bef7affcb20cbfb8e9afa7b7578afd36c889a53",
+      "layer-call055.pt": "269b31cc200c0c63d0d78ce7352f1998ce1e2b37755cc89e55a5d8c36ce4177f",
+      "layer-call044.pt": "a883cad71f91232de0c645bb07a3d69db1d33b0e31d31e197e92e6947faf8777",
+      "layer-call009.pt": "c68d0bdc85520ad6b01be0caa181f85b3426afdab1a0bb31a76bc0be07d9c207",
+      "layer-call054.pt": "86b577b12d0d69ccb7c223d1f38d7402fdabe462ac73257f316cd2e18ec71ed8",
+      "layer-call083.pt": "af5442947d4630b802169c582eec929845f5a521c2baf6bde8a54ba0c5ddf5df",
+      "layer-call088.pt": "644d4eb5496e73a734386852108ec449d31eccb69845a9d323f55e4a70e9207a",
+      "layer-call015.pt": "3c3f98083d4404b9508b9fc21b1a50bb47409c62a1a3ee1cf806eeabac37bffb",
+      "layer-call087.pt": "a629c51634ba08692d9e310c609e76a01d6b925c9e342d33f8822f2a900f89f1",
+      "layer-call013.pt": "81660d7c492ebead06ca57b09cc1f91f6bc386d78146993f843f463f2e1c5590",
+      "layer-call020.pt": "cf0d589de7cfa8625490bce68fe7b2b5d0bf71cb8ec6e6f405752a1ad850aa88",
+      "layer-call019.pt": "9cb9beb53e661506206f97f6e17d02a96b4f997b8114fdd6030db18df62d2ccc",
+      "layer-call074.pt": "d77d333c60522d4129ea4d93a24de905d4c6d47bea3f88c96f55f2859977f272",
+      "layer-call007.pt": "8174418db4d6c01d625fce0fc53ed017241faac6f269eec7e3b9f016a8d4d732",
+      "layer-call051.pt": "1cb12f150ef1e06533c963c7fe5347aa935ff6ed13eaf474e0b50a29d3936df5",
+      "layer-call021.pt": "2067ceade9ef7bf32d29fbdb6943573579fe7840c5df91f0cd08d31e63bbde2b",
+      "layer-call059.pt": "d9d6ef5ed41f33666670ad02465577d0d32ecc29fb18e38c69b50de66790add0",
+      "layer-call056.pt": "eb9ef84e8cee955a9bb417dc069819cd96a3b83a1305bb38343549da9172911b",
+      "layer-call018.pt": "1cafd6af213e36882654177089d9238521be9d2f1b84708f6b19a7b9744acf20",
+      "layer-call064.pt": "a41c0246d0f79498b2e5b7ace78b50590c01e988917cb2bb558b658c1c7622d1",
+      "layer-call012.pt": "17846c9b098a12024c043d0e385fbd28076b8a34c087d1bb2a432184d35cfca3",
+      "layer-call038.pt": "1582fce3a919e0c4495be826fa25e24922c2f744420651f2af77e786bbde19bf",
+      "layer-call036.pt": "2b7f8196781f616c7eb705ab9a586cf0beda012d5369ce85d0fa9cb923351e9f",
+      "layer-call043.pt": "fb47c29df1d1507364a1115e7e3e34a38107c6ac6bc8200e416ca72788c039a9",
+      "layer-call029.pt": "e711fd0a1a974900a33e0108f73d5fea717a51a59761c3553239b73a5bbedd19",
+      "layer-call076.pt": "8f583b142a3208318a3181c5aa689033dd53090bc30a29700452da1684285735",
+      "layer-call033.pt": "906cd96ae90098c6d7e78dc32c31144c91deebf3e329ba95d7dc0e20a59f6533"
+    }
+  },
+  "layout": {
+    "cost_model": "scheduler estimate, not measured cycles",
+    "layouts": [
+      {
+        "call": 29,
+        "snapshot": "/home/vstakhov/aiter/benchmark_results/q256-full-model-shared-boundary-20261010/runs/q256.0MTZQF/routing/rank0/layer-call029.pt",
+        "snapshot_sha256": "e711fd0a1a974900a33e0108f73d5fea717a51a59761c3553239b73a5bbedd19",
+        "routing_ids_sha256": "164c890956f36b26f185efc2030651c3ba09a16dd2429ee1695fcfdd55438fed",
+        "physical_tiles": 627,
+        "routed_tiles": 595,
+        "shared_jobs": 128,
+        "logical_jobs": 723,
+        "padding_rows": 70400,
+        "routed_slot_utilization_percent": 53.78151260504202,
+        "nonempty_routed_experts": 363,
+        "top64_assignment_percent": 80.96435546875,
+        "live32_fragment_histogram": {
+          "1": 193,
+          "2": 37,
+          "3": 33,
+          "4": 30,
+          "5": 17,
+          "6": 28,
+          "7": 9,
+          "8": 248
+        },
+        "tiles_at_most32": 193,
+        "tiles_at_most64": 230,
+        "tiles_at_most128": 293,
+        "gu_executed_rows": 111392,
+        "tiny_routed_gu_executed_rows": 90496,
+        "gu_padding_rows": 29472,
+        "gu_padding_percent": 26.457914392415972,
+        "total_estimated_job_cost": 341082,
+        "gpu_map_matches_accepted_run": true
+      },
+      {
+        "call": 46,
+        "snapshot": "/home/vstakhov/aiter/benchmark_results/q256-full-model-shared-boundary-20261010/runs/q256.0MTZQF/routing/rank0/layer-call046.pt",
+        "snapshot_sha256": "c69a03307edb169e45abf7102ed96d90f3cf6114d3c66b3ec51d64db43f19e68",
+        "routing_ids_sha256": "f366ba414761632da0e929a242a771b032dae3f73ac1885f449fa8cd8cb4e512",
+        "physical_tiles": 712,
+        "routed_tiles": 680,
+        "shared_jobs": 128,
+        "logical_jobs": 808,
+        "padding_rows": 92160,
+        "routed_slot_utilization_percent": 47.05882352941177,
+        "nonempty_routed_experts": 493,
+        "top64_assignment_percent": 58.35205078125,
+        "live32_fragment_histogram": {
+          "1": 212,
+          "2": 90,
+          "3": 52,
+          "4": 33,
+          "5": 35,
+          "6": 26,
+          "7": 25,
+          "8": 207
+        },
+        "tiles_at_most32": 212,
+        "tiles_at_most64": 302,
+        "tiles_at_most128": 387,
+        "gu_executed_rows": 119520,
+        "tiny_routed_gu_executed_rows": 93408,
+        "gu_padding_rows": 37600,
+        "gu_padding_percent": 31.45917001338688,
+        "total_estimated_job_cost": 377164,
+        "gpu_map_matches_accepted_run": true
+      },
+      {
+        "call": 49,
+        "snapshot": "/home/vstakhov/aiter/benchmark_results/q256-full-model-shared-boundary-20261010/runs/q256.0MTZQF/routing/rank0/layer-call049.pt",
+        "snapshot_sha256": "47988119c065cbd7c7f53e7bb1a527f5058aca1b90baf6723fec93cd1c194f22",
+        "routing_ids_sha256": "d8d209b256c1536713b19d181f0f49d4b6d3ec27d4dd3eb5abc111a1558ae302",
+        "physical_tiles": 707,
+        "routed_tiles": 675,
+        "shared_jobs": 128,
+        "logical_jobs": 803,
+        "padding_rows": 90880,
+        "routed_slot_utilization_percent": 47.407407407407405,
+        "nonempty_routed_experts": 470,
+        "top64_assignment_percent": 63.638916015625,
+        "live32_fragment_histogram": {
+          "1": 232,
+          "2": 62,
+          "3": 55,
+          "4": 37,
+          "5": 31,
+          "6": 19,
+          "7": 13,
+          "8": 226
+        },
+        "tiles_at_most32": 232,
+        "tiles_at_most64": 294,
+        "tiles_at_most128": 386,
+        "gu_executed_rows": 119200,
+        "tiny_routed_gu_executed_rows": 92960,
+        "gu_padding_rows": 37280,
+        "gu_padding_percent": 31.2751677852349,
+        "total_estimated_job_cost": 375004,
+        "gpu_map_matches_accepted_run": true
+      }
+    ]
+  },
+  "monitor": {
+    "samples": 22,
+    "all_eligible": true,
+    "three_gates_pass": true
+  },
+  "scope": "exact captured routing and gates, synthetic activations/expert weights; full-model latency not measured"
+}

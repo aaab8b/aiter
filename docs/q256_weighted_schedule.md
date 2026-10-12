@@ -53,3 +53,38 @@ AITER_Q256_WEIGHTED_SCHEDULE=1 python3 op_tests/test_q256_aiter.py \
 The wrapper requires `AITER_CONFIG_FMOE` and `AITER_JIT_DIR`. Run the same command
 with the opt-in set to `0` for the fixed control. Full-model latency and memory
 validation are still required before enabling the opt-in in production.
+
+
+## Captured routing limits at 8192 tokens
+
+A three-provider paired replay on MI355X PCI `0000:65:00.0` used the same
+captured token/slot routes and gates with synthetic activation/expert tensors.
+Each result below is the median of 15 paired percentages, with ABBA/BAAB order
+and 50 full API calls per block. Exact complete outputs agree among weighted
+Q256, fixed Q256 and FlyDSL; sampled reference NRMS is below 0.002627.
+
+| Capture | Weighted vs fixed Q256, eager | Weighted vs fixed Q256, graph | Weighted vs FlyDSL, eager | Weighted vs FlyDSL, graph |
+| --- | ---: | ---: | ---: | ---: |
+| 029 | +4.315% | +3.622% | +6.677% | +7.312% |
+| 046 | +1.535% | +1.527% | -1.152% | +0.211% |
+| 049 | +2.593% | +3.706% | -1.137% | -0.950% |
+
+Positive percentages mean weighted Q256 is faster. Graph capture 046 is near
+parity with FlyDSL and has a broad paired range (-3.023% to +3.477%); capture 049
+loses every sample in both modes. A preceding independent replay also lost all
+15 samples on 046/049 against FlyDSL, at about 1% in graph mode. Scheduling helps
+against fixed Q256 while the complete Q256 pipeline can still lose to FlyDSL.
+
+Captured layouts 029/046/049 have 595/680/675 routed BM256 tiles and 723/808/803
+logical jobs. The latter two need a fourth job for 40/35 persistent owners.
+The existing routed GU selects at least M128, so tails with ≤64 live rows still
+execute additional GU capacity. This association does not isolate padding from
+expert distribution or weight locality.
+
+The production weighted CO is unchanged. Experimental M32/M64 routed variants
+are excluded from this PR. Trimming GU and down passed correctness but worsened
+046/049 latency; trimming only GU retained about a 1% FlyDSL deficit on those
+captures. These experiments do not establish padding as the sole cause. Full model validation is still required before default enablement.
+
+Per-sample timing, artifact hashes and correctness evidence are recorded in
+[q256_weighted_real_routes_20261012.json](benchmarks/q256_weighted_real_routes_20261012.json).
